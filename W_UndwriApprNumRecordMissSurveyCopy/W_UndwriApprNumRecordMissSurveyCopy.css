@@ -1,0 +1,22 @@
+.THIS {
+}
+.THIS .mycontainer {
+    margin: 0 auto;
+    height: 100%;
+    width:100%;
+    padding: 3rem 0;
+    position: relative;
+}
+.THIS .my-body {
+    overflow: hidden;
+    overflow-y: auto;
+    height: 14rem;
+    background:#FFF;
+}
+.THIS .my-header2{
+    flex-shrink: 0;
+    height: 70px;
+}
+.THIS .sbutton{
+	margin-top:-5px;
+}

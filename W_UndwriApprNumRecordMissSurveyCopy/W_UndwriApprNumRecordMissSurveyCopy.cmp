@@ -1,0 +1,55 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" 
+                controller="W_UndwriApprNumRecordMSController" access="global" >
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="UndwriApprNumRecordMissSurveyId" type="Id" default=""/>
+    <aura:attribute name="newUndwriApprNumRecordMissSurvey" type="UndwriApprNumRecordMissSurvey__c" default="{'sobjectType':'UndwriApprNumRecordMissSurvey__c'}"/>
+    <aura:attribute name="simpleNewUndwriApprNumRecordMissSurvey" type="UndwriApprNumRecordMissSurvey__c" default="{'sobjectType':'UndwriApprNumRecordMissSurvey__c'}"/>
+    <aura:attribute name="Error" type="String" />
+    <aura:attribute name="lookup" type="Id" default=""/>
+    <aura:attribute name="marginheight" type="String" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <force:recordData 	aura:id="Editor"
+                      layoutType="FULL"     
+                      recordId="{!v.UndwriApprNumRecordMissSurveyId}"
+                      targetRecord="{!v.newUndwriApprNumRecordMissSurvey}"                   
+                      targetFields="{!v.simpleNewUndwriApprNumRecordMissSurvey}"
+                      targetError="{!v.Error}"
+                      mode="EDIT" />
+    
+    <div aura:id="showModal" class="slds-modal slds-fade-in-open ">
+        <div>
+            <div id="mycontainer" class="modal-container slds-modal__containermycontainer" style="{!'height:360px;margin-top:' + v.marginheight +'px;'}">
+                
+                <div style="height:70px;" class="modal-header slds-modal__header">
+                    <lightning:buttonIcon onclick="{!c.cancel}" iconName="utility:close" alternativeText="Close" class="slds-modal__close sbutton" variant="bare-inverse" size="large"/>
+                    <h2 class="title slds-text-heading--medium" style="margin-top: 6px;" >申請コピー</h2>
+                </div>
+                
+                <div class="my-body slds-scope">
+                    <div style="padding:2rem;margin-top: -11px;" class="slds-form slds-form_compound">
+                        <div class="slds-form-element__row">
+                            <div class="slds-form-element slds-size_1-of-2">
+                                <div class="slds-form-element__control">
+                                    <lightning:recordEditForm recordId="{!v.UndwriApprNumRecordMissSurveyId}" objectApiName="UndwriApprNumRecordMissSurvey__c">
+                                    	<lightning:inputField fieldName="KassyMst__c" value='{!v.lookup}'/>
+                                    </lightning:recordEditForm>
+                                </div>
+                            </div>
+                            <div class="slds-form-element slds-size_1-of-2"> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="height:70px;" class="modal-footer slds-modal__footer">
+                    <div class="forceModalActionContainer--footerAction forceModalActionContainer">
+                        <lightning:button label="キャンセル" onclick="{!c.cancel}"/>
+                        <lightning:button class="slds-button slds-button_brand" label="保存" onclick="{!c.saveRecord}"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>    
+</aura:component>

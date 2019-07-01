@@ -1,0 +1,95 @@
+public with sharing class W_UndwriApprNumRecordMSController {
+	@AuraEnabled
+    public static UndwriApprNumRecordMissSurvey__c getInfo(String SId,String lookupId) {
+        UndwriApprNumRecordMissSurvey__c Unan=[select id,name
+                                               ,ApplReceptionNum__c
+                                               ,ApplDDCd__c
+                                               ,ApplDDBranchOfficeNm__c
+                                               ,HandlingAG__c
+                                               ,LineInsurance__c
+                                               ,InsType__c
+                                               ,InsTypeClassification__c
+                                               ,SpecialAgreement1__c
+                                               ,SpecialAgreement2__c
+                                               ,BeginPlan__c
+                                               ,MaturityDatePlan__c
+                                               ,ContractorNm__c
+                                               ,ReferUndwriApprNum__c
+                                               ,BeforeContPolNum__c
+                                               ,UndwriApprNum__c
+                                               ,UndwriApprDue__c
+                                               ,DecisionMakerDate__c      
+                                               ,UndwriStndCode1__c  
+                                               ,UndwriStndCode2__c  
+                                               ,UndwriStndCode3__c  
+                                               ,UndwriStndCode4__c  
+                                               ,UndwriStndCode5__c  
+                                               ,AppropriateStatus__c  
+                                               ,NewContPolNum__c  
+                                               ,InsBegin__c  
+                                               ,Note__c  
+                                               from UndwriApprNumRecordMissSurvey__c where id=:SId];
+        system.debug(Unan);
+        UndwriApprNumRecordMissSurvey__c copyUnan=new UndwriApprNumRecordMissSurvey__c();
+        //対応状況
+        copyUnan.ResponseStatus__c='対応中';
+        //申請受付番号
+        copyUnan.ApplReceptionNum__c=Unan.ApplReceptionNum__c;
+        //申請部課コード
+        copyUnan.ApplDDCd__c=Unan.ApplDDCd__c;
+        //申請部課支社名
+        copyUnan.ApplDDBranchOfficeNm__c=Unan.ApplDDBranchOfficeNm__c;
+        //扱部課
+        copyUnan.KassyMst__c=lookupId;
+        //扱AG
+        copyUnan.HandlingAG__c=Unan.HandlingAG__c;
+        //大種目
+        copyUnan.LineInsurance__c=Unan.LineInsurance__c;
+        //保種
+        copyUnan.InsType__c=Unan.InsType__c;
+        //保種分類
+        copyUnan.InsTypeClassification__c=Unan.InsTypeClassification__c;
+        //特別約款1
+        copyUnan.SpecialAgreement1__c=Unan.SpecialAgreement1__c;
+        //特別約款2
+        copyUnan.SpecialAgreement2__c=Unan.SpecialAgreement2__c;
+        //始期（予定）
+        copyUnan.BeginPlan__c=Unan.BeginPlan__c;
+        //満期日（予定）
+        copyUnan.MaturityDatePlan__c=Unan.MaturityDatePlan__c;
+        //契約者名
+        copyUnan.ContractorNm__c=Unan.ContractorNm__c;
+        //参照引受承認番号
+        copyUnan.ReferUndwriApprNum__c=Unan.ReferUndwriApprNum__c;
+        //前契約証券番号
+        copyUnan.BeforeContPolNum__c=Unan.BeforeContPolNum__c;
+        //引受承認番号
+        copyUnan.UndwriApprNum__c=Unan.UndwriApprNum__c;
+        //引受承認期限
+        copyUnan.UndwriApprDue__c=Unan.UndwriApprDue__c;
+        //決裁日
+        copyUnan.DecisionMakerDate__c=Unan.DecisionMakerDate__c;
+        //引受基準コード1
+        copyUnan.UndwriStndCode1__c=Unan.UndwriStndCode1__c;
+        //引受基準コード2
+		copyUnan.UndwriStndCode2__c=Unan.UndwriStndCode2__c;
+        //引受基準コード3
+        copyUnan.UndwriStndCode3__c=Unan.UndwriStndCode3__c;
+        //引受基準コード4
+        copyUnan.UndwriStndCode4__c=Unan.UndwriStndCode4__c;
+        //引受基準コード5
+        copyUnan.UndwriStndCode5__c=Unan.UndwriStndCode5__c;
+        //計上ステータス
+        copyUnan.AppropriateStatus__c=Unan.AppropriateStatus__c;
+        //新契約証券番号
+        copyUnan.NewContPolNum__c=Unan.NewContPolNum__c;
+        //保険始期
+        copyUnan.InsBegin__c=Unan.InsBegin__c;
+        //備考
+		copyUnan.Note__c=Unan.Note__c;
+        
+        insert copyUnan;
+        system.debug(copyUnan);
+    	return copyUnan;       
+    }
+}
